@@ -13,7 +13,7 @@ COPY src ./src
 RUN --mount=type=cache,target=/root/.cache/uv \
     if [ -f uv.lock ]; then uv sync --frozen --no-dev; else uv sync --no-dev; fi
 
-FROM python:3.11.11-slim-bookworm AS runtime
+FROM python:3.14.8-slim-bookworm AS runtime
 
 ENV PATH="/app/.venv/bin:${PATH}" \
     PYTHONUNBUFFERED=1 \
