@@ -49,9 +49,8 @@ def main() -> int:
             record = result.as_dict()
             if result.supported and result.model is not None:
                 path = args.output_dir / "model-dynamic-int8.pt"
-                torch.jit.trace(  # type: ignore[no-untyped-call]
-                    result.model, sample.cpu()
-                ).save(str(path))
+                jit: Any = torch.jit
+                jit.trace(result.model, sample.cpu()).save(str(path))
                 record["artifact"] = str(path)
             records.append(record)
     destination = args.output_dir / "export_records.json"

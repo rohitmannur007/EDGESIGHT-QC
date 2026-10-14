@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
 from pathlib import Path
 from typing import Any
@@ -34,8 +35,7 @@ def main() -> int:
         try:
             if args.artifact.suffix == ".onnx":
                 runtime = "onnxruntime"
-                import onnxruntime as ort  # type: ignore[import-untyped]
-
+                ort = importlib.import_module("onnxruntime")
                 session = ort.InferenceSession(
                     str(args.artifact), providers=["CPUExecutionProvider"]
                 )
@@ -49,7 +49,8 @@ def main() -> int:
                 runtime = "torchscript"
                 import torch
 
-                model = torch.jit.load(str(args.artifact)).eval()  # type: ignore[no-untyped-call]
+                jit: Any = torch.jit
+                model = jit.load(str(args.artifact)).eval()
                 sample = torch.randn(*shape)
 
                 def operation(value: Any) -> Any:
