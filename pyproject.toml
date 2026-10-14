@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling==1.27.0"]
+requires = ["hatchling==1.32.4"]
 build-backend = "hatchling.build"
 
 [project]
@@ -22,9 +22,9 @@ dependencies = [
   "pillow>=10.4.0,<12",
   "opencv-python-headless>=4.10.0.84,<5",
   "httpx>=0.28.0,<0.29",
-  "typer>=0.15.0,<0.16",
+  "typer>=0.15.0,<0.28",
   "rich>=13.9.0,<14",
-  "prometheus-client>=0.21.0,<0.22",
+  "prometheus-client>=0.21.0,<0.27",
   "structlog>=24.4.0,<26",
 ]
 
@@ -32,10 +32,10 @@ dependencies = [
 ml = [
   "torch>=2.14.1,<2.15",
   "torchvision>=0.29.1,<0.30",
-  "scikit-learn>=1.5.0,<1.7",
-  "scipy>=1.13.0,<1.16",
+  "scikit-learn>=1.5.0,<1.10",
+  "scipy>=1.13.0,<1.18",
   "pandas>=2.2.0,<2.3",
-  "matplotlib>=3.9.0,<3.11",
+  "matplotlib>=3.9.0,<3.12",
   "ultralytics>=8.4.177,<8.5",
   "onnx>=1.17.0,<2",
   "onnxscript>=0.5.0,<1",
@@ -57,7 +57,7 @@ ui = [
 dev = [
   "pytest>=8.3.0,<9",
   "pytest-cov>=6.0.0,<7",
-  "ruff>=0.9.0,<0.10",
+  "ruff>=0.9.0,<0.18",
   "mypy>=1.14.0,<2",
   "types-PyYAML>=6.0.12,<7",
   "pre-commit>=4.0.0,<5",
@@ -74,7 +74,7 @@ default-groups = ["dev"]
 dev = [
   "pytest>=8.3.0,<9",
   "pytest-cov>=6.0.0,<7",
-  "ruff>=0.9.0,<0.10",
+  "ruff>=0.9.0,<0.18",
   "mypy>=1.14.0,<2",
   "types-PyYAML>=6.0.12,<7",
   "pre-commit>=4.0.0,<5",
