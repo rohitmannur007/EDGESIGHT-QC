@@ -64,7 +64,7 @@ class ImagePreprocessor:
     def __call__(self, payload: bytes) -> PreprocessedImage:
         return self.process(payload)
 
-    def process(self, payload: bytes) -> PreprocessedImage:
+    def process(self, payload: bytes, *, require_tensor: bool = True) -> PreprocessedImage:
         if not payload:
             raise InvalidImage("image payload is empty")
         try:
@@ -88,7 +88,10 @@ class ImagePreprocessor:
         tensor_image = rgb.resize(self.image_size, Image.Resampling.BILINEAR)
         tensor_array = np.asarray(tensor_image, dtype=np.float32) / 255.0
         tensor_array = (tensor_array - self.IMAGENET_MEAN) / self.IMAGENET_STD
-        tensor = self._to_tensor(np.transpose(tensor_array, (2, 0, 1))[None, ...])
+        tensor = self._to_tensor(
+            np.transpose(tensor_array, (2, 0, 1))[None, ...],
+            required=require_tensor,
+        )
         return PreprocessedImage(
             pil=rgb,
             detector=detector,
@@ -99,11 +102,15 @@ class ImagePreprocessor:
             format=str(image_format),
         )
 
-    def _to_tensor(self, value: np.ndarray) -> Any:
+    def _to_tensor(self, value: np.ndarray, *, required: bool = True) -> Any:
         torch = self._torch_module
         if torch is None:
             try:
                 import torch
             except ImportError as exc:
-                raise PreprocessingUnavailable("real anomaly inference requires PyTorch") from exc
+                if required:
+                    raise PreprocessingUnavailable(
+                        "real anomaly inference requires PyTorch"
+                    ) from exc
+                return np.ascontiguousarray(value)
         return torch.from_numpy(np.ascontiguousarray(value))

@@ -91,7 +91,9 @@ class InspectionPipeline:
         metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         metadata = metadata or {}
-        prepared = self.preprocessor.process(payload)
+        prepared = self.preprocessor.process(
+            payload, require_tensor=self.engine.mode is not InferenceMode.DEMO
+        )
         model_input = payload if self.engine.mode is InferenceMode.DEMO else prepared
         inference = self.engine.predict(model_input, source=filename)
         detections = list(inference.detections)
