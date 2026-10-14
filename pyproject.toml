@@ -23,7 +23,7 @@ dependencies = [
   "opencv-python-headless>=4.10.0.84,<5",
   "httpx>=0.28.0,<0.29",
   "typer>=0.15.0,<0.16",
-  "rich>=13.9.0,<14",
+  "rich>=13.9.0,<16",
   "prometheus-client>=0.21.0,<0.22",
   "structlog>=24.4.0,<26",
 ]
