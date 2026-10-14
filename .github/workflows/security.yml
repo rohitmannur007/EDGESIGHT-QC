@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v5
         with:
           version: "0.5.21"
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build -t edgesight-qc:scan .
       - uses: aquasecurity/trivy-action@0.28.0
         with:
