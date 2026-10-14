@@ -1,0 +1,18 @@
+# Synthetic-only demonstration. It is not a benchmark and must not be reported as real accuracy.
+extends: configs/default.yaml
+project:
+  name: edgesight-qc-synthetic-demo
+  seed: 42
+  environment: demo
+demo:
+  synthetic: true
+  samples: 24
+  defect_probability: 0.35
+  output_dir: results/demo
+  watermark: SYNTHETIC DEMO
+inference:
+  backend: heuristic
+  device: cpu
+  confidence_threshold: 0.5
+telemetry:
+  include_image_content: false

@@ -1,0 +1,8 @@
+image_size: 256
+warmup_runs: 5
+measured_runs: 30
+batch_size: 1
+runtimes: [pytorch_cpu, pytorch_mps, onnx_cpu]
+exports: [onnx_fp32, onnx_fp16, dynamic_int8, coreml_optional]
+verify_output_tolerance: 0.001
+unrun_status: NOT_RUN

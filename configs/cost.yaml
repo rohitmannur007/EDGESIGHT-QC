@@ -1,0 +1,10 @@
+illustrative: true
+currency: USD
+per_item:
+  missed_defect: 100.0
+  false_rejection: 5.0
+  human_review: 1.0
+  inspection: 0.02
+  downstream_escape: 250.0
+maximum_validation_false_alarm_rate: 0.05
+items_for_report: 1000

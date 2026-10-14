@@ -1,0 +1,22 @@
+seed: 42
+dataset:
+  license_acknowledged: false
+detector:
+  data: data/processed/yolo/data.yaml
+  base_model: models/detector/yolo11n.pt
+  pretrained_weights_license_reviewed: false
+  weight_source: Ultralytics YOLO11n; acquire explicitly under applicable terms
+  output_dir: models/detector/runs
+  promoted_path: models/detector/best.pt
+  image_size: 640
+  epochs: 50
+  batch_size: 4
+  learning_rate: 0.001
+  confidence: 0.35
+  patience: 10
+  device: mps
+  class_mapping_source: data/processed/yolo/data.yaml
+  augmentation:
+    horizontal_flip: 0.5
+    brightness: 0.1
+    blur: 0.05

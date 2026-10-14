@@ -1,0 +1,10 @@
+root: data/raw/mvtec
+categories: [capsule, hazelnut, tile]
+seed: 42
+known_split: [0.6, 0.2, 0.2]
+held_out:
+  capsule: squeeze
+  hazelnut: print
+  tile: rough
+minimum_component_area: 16
+manifest: data/splits/splits.json

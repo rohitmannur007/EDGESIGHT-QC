@@ -1,0 +1,10 @@
+detector_threshold: 0.7
+anomaly_threshold: 0.5
+human_review_enabled: true
+precedence:
+  both_trigger: HUMAN_REVIEW
+  detector_only: KNOWN_DEFECT
+  anomaly_only: UNKNOWN_DEFECT
+  neither: PASS
+missing_anomaly: detector_only
+missing_detector: anomaly_only

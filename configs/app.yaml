@@ -1,0 +1,28 @@
+mode: demo
+seed: 42
+device_order: [mps, cpu]
+device: auto
+database_path: results/edgesight.duckdb
+artifact_directory: results/artifacts
+max_upload_bytes: 10485760
+max_batch_size: 32
+image_size: 256
+logging_level: INFO
+model_version: demo-deterministic-v1
+preprocessing_version: rgb-v1
+category: capsule
+runtime: pytorch
+models:
+  detector_path: models/detector/best.pt
+  anomaly_models:
+    capsule: models/anomaly/capsule/patchcore.pt
+    hazelnut: models/anomaly/hazelnut/patchcore.pt
+    tile: models/anomaly/tile/patchcore.pt
+thresholds:
+  detector: 0.7
+  # False uses the threshold saved in each category PatchCore artifact.
+  use_manual_anomaly_threshold: false
+  anomaly: {}
+security:
+  require_api_key: false
+  api_key_env: EDGESIGHT_API_KEY

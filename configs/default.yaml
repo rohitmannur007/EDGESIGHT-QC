@@ -1,0 +1,52 @@
+project:
+  name: edgesight-qc
+  seed: 42
+  environment: development
+
+paths:
+  data_dir: data
+  model_dir: models
+  results_dir: results
+
+logging:
+  level: INFO
+  format: json
+
+inference:
+  backend: onnxruntime
+  device: cpu
+  model_path: models/current/model.onnx
+  metadata_path: models/current/metadata.json
+  image_size: [640, 640]
+  batch_size: 1
+  confidence_threshold: 0.5
+  anomaly_threshold: 0.5
+  warmup_runs: 3
+  request_timeout_seconds: 10
+
+preprocessing:
+  color_space: RGB
+  normalize: true
+  preserve_aspect_ratio: true
+  pad_value: 114
+  accepted_types: [image/jpeg, image/png]
+  max_upload_mb: 10
+
+api:
+  host: 0.0.0.0
+  port: 8080
+  workers: 1
+  api_key_env: EDGESIGHT_API_KEY
+  cors_origins: []
+  metrics_enabled: true
+
+quality:
+  fail_closed: true
+  allowed_classes: []
+  review_band: [0.4, 0.6]
+
+telemetry:
+  service_name: edgesight-qc
+  include_image_content: false
+  include_image_hash: true
+  prometheus_path: /metrics

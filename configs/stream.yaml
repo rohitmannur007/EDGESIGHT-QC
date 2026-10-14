@@ -1,0 +1,37 @@
+extends: configs/default.yaml
+app_config: configs/app.yaml
+mode: demo
+
+database:
+  path: results/edgesight.duckdb
+
+monitoring:
+  config: configs/drift.yaml
+  baseline: configs/drift_baseline.json
+
+stream:
+  brokers: ${EDGESIGHT_KAFKA_BROKERS:-localhost:19092}
+  input_topic: ${EDGESIGHT_INPUT_TOPIC:-frames}
+  output_topic: ${EDGESIGHT_OUTPUT_TOPIC:-results}
+  dead_letter_topic: ${EDGESIGHT_DLQ_TOPIC:-frames.dlq}
+  monitoring_topic: ${EDGESIGHT_MONITORING_TOPIC:-monitoring.events}
+  consumer_group: edgesight-qc-v1
+  client_id: edgesight-qc
+  auto_offset_reset: earliest
+  enable_auto_commit: false
+  max_poll_interval_ms: 300000
+  session_timeout_ms: 45000
+  batch_size: 8
+  batch_timeout_ms: 100
+  max_retries: 3
+  retry_backoff_seconds: 1
+  message_max_bytes: 10485760
+  schema_version: "1"
+  image_reference_mode: uri
+  idempotency_key: event_id
+
+security:
+  protocol: PLAINTEXT
+  sasl_mechanism: null
+  username_env: EDGESIGHT_KAFKA_USERNAME
+  password_env: EDGESIGHT_KAFKA_PASSWORD

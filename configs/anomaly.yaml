@@ -1,0 +1,25 @@
+seed: 42
+dataset:
+  license_acknowledged: false
+anomaly:
+  normal_image_dir: data/processed/anomaly
+  output: models/anomaly
+  artifact_layout: "{category}/patchcore.pt"
+  backbone: resnet18
+  pretrained_backbone: true
+  backbone_weights: models/backbones/resnet18-imagenet1k-v1.pth
+  pretrained_weights_license_reviewed: false
+  weight_source: torchvision ResNet18 IMAGENET1K_V1
+  layers: [layer2, layer3]
+  image_size: 256
+  batch_size: 4
+  coreset_fraction: 0.1
+  maximum_bank_size: 10000
+  candidate_reservoir_size: 40000
+  coreset_strategy: greedy
+  maximum_fit_images: 200
+  distance_chunk_size: 512
+  device: mps
+  distance_device: cpu
+  threshold: 0.5
+  calibration_quantile: 0.99

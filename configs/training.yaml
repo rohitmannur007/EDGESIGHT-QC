@@ -1,0 +1,40 @@
+extends: configs/default.yaml
+
+dataset:
+  root: data/raw/mvtec
+  manifest: data/splits/splits.json
+  license_acknowledged: false
+  split:
+    train: 0.60
+    validation: 0.20
+    test: 0.20
+  stratify: true
+  leakage_group_key: source_id
+
+training:
+  model_families: [detector, anomaly]
+  epochs: 30
+  batch_size: 16
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  early_stopping_patience: 5
+  num_workers: 4
+  device: auto
+  mixed_precision: true
+  deterministic: true
+  pretrained: false
+  pretrained_weights_license_reviewed: false
+  output_dir: models/runs
+
+evaluation:
+  thresholds: [0.3, 0.4, 0.5, 0.6, 0.7]
+  bootstrap_samples: 1000
+  report_slices: [category, defect_type, source_id]
+  save_predictions: true
+  save_failure_examples: true
+
+export:
+  format: onnx
+  opset: 17
+  dynamic_batch: false
+  quantize: false

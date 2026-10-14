@@ -1,0 +1,8 @@
+baseline_version: clean-validation-v1
+window_size: 100
+minimum_samples: 30
+consecutive_windows: 3
+psi_threshold: 0.2
+ks_threshold: 0.2
+signals: [brightness, contrast, blur, compression_quality, anomaly_score, embedding]
+auto_retrain: false

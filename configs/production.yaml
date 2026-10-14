@@ -1,0 +1,21 @@
+extends: configs/default.yaml
+project:
+  environment: production
+logging:
+  level: INFO
+  format: json
+inference:
+  backend: onnxruntime
+  device: cpu
+  batch_size: 1
+  warmup_runs: 5
+  request_timeout_seconds: 5
+api:
+  workers: 1
+  cors_origins: []
+  metrics_enabled: true
+quality:
+  fail_closed: true
+telemetry:
+  include_image_content: false
+  include_image_hash: true
